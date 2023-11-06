@@ -1,67 +1,46 @@
-# Chat-server
+# Chat Server
 
-...need to add the coursework specifications.
+This repository contains the implementation of a Java-based chat server designed to follow a simplified version of the IRC protocol. This project was developed as part of Practical 3 for the CS5001 course - Object-Oriented Modelling, Design, and Programming at the University of St Andrews.
 
+## Overview
 
-This README file explains the basic functionalities and usages for
-the "IrcServerMain.java" file, version 1.0, which has been submitted as
-required for Practical - 3, of CS5001 course.
+The chat server implements core functionalities akin to the Internet Relay Chat (IRC) protocol, allowing multiple users to connect, join different channels, and exchange messages in real-time. The main functionalities implemented in accordance with the coursework specifications include:
 
-The program does all the basic functionalities as specified by the 
-coursework. The program works in accordance with the principle of least surprise.
+- **NICK and USER Commands:** Allows users to set their nickname, username, and real name for registration.
+- **JOIN and PART Commands:** Enables users to join or leave a channel, ensuring smooth communication among channel members.
+- **PRIVMSG Command:** Facilitates messaging between users within a channel or privately to a specific user.
+- **NAMES and LIST Commands:** Provides users with a list of channel members or all available channels.
+- **TIME, INFO, and PING Commands:** Supports additional functionalities to retrieve server time, basic server information, and check the connection status.
 
-Additional features implemented :
+## Usage
 
----- COMPILE AND RUN ON THE COMMAND LINE ----
+### Compiling and Running
 
-The usage for this program:
+To compile and run the server, use the following command:
 
-        java IrcServerMain <serverName> <port>
+```bash
+javac *.java
+java IrcServerMain <serverName> <port>
+```
 
-1) If the port number goes out of bounds required, or is a reserved number:
-    
-        Port value out of range: <port>
- 
-            or
- 
-        Invalid port number: <port>
-        
-   is shown accordingly
+Replace `<serverName>` with the desired name for your server and `<port>` with a valid port number.
 
-2) Invalid command addition:
-    
-    toReplyInvalidMsg() method is implemented that writes to the client if
-    the command the client entered was not available in the command cases.
-    
-    message:
-             :localhost 400 * :Invalid command
-    
-3) The program stores nickName linking it with the username and the realname
-   (eventhough its not specified), as chat apps usually keep the details of the
-   users until the user quits.
-   
-4) Each nick name(of the client) is unique. If a client tries to enter a nick name that
-   already exists an error is thrown. (The nickname entered is only compared with the 
-   other clients that are registered).
-   
-   message:
-            :localhost 400 * :Nickname exists
-   
-5) Eventhough once a user is registered they cannot change the username and the realname,
-   the program allows the user to change the nickname, keeping the username and the realname.
-   
-6) User duplication for a given channel is taken care of. Whenever a user tries to join a 
-   channel on which he already exists, he is given a message, and not allowed to join again.
-   
-   message:
-           :localhost 400 * :You already exist in this channel
-   
-7) An invalid argument message for JOIN command is implemented.
+### Error Handling and Additional Features
 
-   message:
-           :localhost 400 * :Invalid arguments to JOIN command
+- **Invalid Port Number:** Displays an error message when the port number is out of bounds or is a reserved number.
+- **Command Validation:** Provides responses for invalid or unavailable commands entered by the client.
+- **Unique Nickname Registration:** Ensures each nickname registered by clients is unique. A message is sent if a duplicate nickname is attempted.
+- **Dynamic Nickname Modification:** Allows users to change their nickname while retaining their username and real name.
+- **Prevents Duplicate Entry into a Channel:** Ensures a user cannot join a channel in which they are already present, preventing channel duplication.
 
-8) An invalid argument message for PART command is implemented.
+## Future Improvements
 
-   message:
-           :localhost 400 * :Invalid arguments to PART command
+Future enhancements may include:
+- Implementing private message history.
+- Adding support for multiple server instances.
+- Developing a client-side application for a user-friendly chat experience.
+
+## Author
+Sathwic Krishna Jain
+
+This README provides information on how to compile and run the server along with an overview of its features and potential improvements.
